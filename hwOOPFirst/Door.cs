@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace hwOOPFirst
 {
+    public enum DoorStatus
+    {
+        Open, Closed
+    }
     class Door
     {
-        public enum DoorStatus
-        {
-            Open,Closed
-        }
-
         public DoorStatus Status { get; private set; } = DoorStatus.Closed;
 
+        public Door() { }
         public Door(DoorStatus status) => Status = status;
 
         public void Open()
@@ -28,7 +28,5 @@ namespace hwOOPFirst
             if (Status == DoorStatus.Open)
                 Status = DoorStatus.Closed;
         }
-    }
-
-    
+    }    
 }
