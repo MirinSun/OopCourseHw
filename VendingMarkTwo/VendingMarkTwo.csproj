@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD73E619-EDF4-460E-8262-8CD87A2C56E7}</ProjectGuid>
+    <ProjectGuid>{40555F83-A08A-467E-9D84-B9D4DEB38645}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SecondTask</RootNamespace>
-    <AssemblyName>SecondTask</AssemblyName>
+    <RootNamespace>VendingMarkTwo</RootNamespace>
+    <AssemblyName>VendingMarkTwo</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,13 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Good.cs" />
-    <Compile Include="GoodsRepository.cs" />
-    <Compile Include="Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WendingMachine.cs" />
-    <Compile Include="WendingMachineGUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

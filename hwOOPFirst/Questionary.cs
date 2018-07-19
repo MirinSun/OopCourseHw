@@ -17,8 +17,11 @@ namespace hwOOPFirst
     {
         private List<QuestionaryElement> _elements = new List<QuestionaryElement>();
 
-        public void AddElement(QuestionaryElement element)
+        public void Add(QuestionaryElement element)
         {
+            if (element == null)
+                throw new ArgumentNullException();
+
             _elements.Add(element);
         }      
 

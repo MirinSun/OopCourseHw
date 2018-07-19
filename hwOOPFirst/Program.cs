@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Threading;
+using System.Linq;
 using System.Collections;
 
 namespace hwOOPFirst
@@ -14,34 +15,62 @@ namespace hwOOPFirst
         static void Main(string[] args)
         {
             Door[] doors = new Door[3];
-            Questionary questionary = new Questionary();
-
-            questionary.AddElement(new QuestionaryElement
+            Questionary questionary = new Questionary()
             {
-                Question = "Кто вы?",
-                AnswersOptions = new String[]
+                new QuestionaryElement
                 {
-                    "Человек", "Брандлмуха", "Кхаджит"
+                    Question = "Кто вы?",
+                    AnswersOptions = new String[]
+                    {
+                        "Человек", "Брандлмуха", "Кхаджит"
+                    }             
                 },
-            });
-
-            questionary.AddElement(new QuestionaryElement
-            {
-                Question = "Что вы хотите?",
-                AnswersOptions = new String[]
+                new QuestionaryElement
                 {
-                    "Победить Аразота", "Стать богатым", "Найти боевых товарищей"
+                    Question = "Что вы хотите?",
+                    AnswersOptions = new String[]
+                    {
+                        "Победить Аразота", "Стать богатым", "Найти боевых товарищей"
+                    }
+                },
+                new QuestionaryElement
+                {
+                    Question = "Чем вы можете помочь ордену?",
+                    AnswersOptions = new String[]
+                    {
+                        "Я отлчиный воин", "Я добротный маг", "Я могу работать в кузнице"
+                    }
                 }
-            });
+            };
 
-            questionary.AddElement(new QuestionaryElement
-            {
-                Question = "Чем вы можете помочь ордену?",
-                AnswersOptions = new String[]
-                {
-                    "Я отлчиный воин", "Я добротный маг", "Я могу работать в кузнице"
-                }               
-            });
+            #region старый способ
+            //questionary.AddElement(new QuestionaryElement
+            //{
+            //    Question = "Кто вы?",
+            //    AnswersOptions = new String[]
+            //    {
+            //        "Человек", "Брандлмуха", "Кхаджит"
+            //    },
+            //});
+
+            //questionary.AddElement(new QuestionaryElement
+            //{
+            //    Question = "Что вы хотите?",
+            //    AnswersOptions = new String[]
+            //    {
+            //        "Победить Аразота", "Стать богатым", "Найти боевых товарищей"
+            //    }
+            //});
+
+            //questionary.AddElement(new QuestionaryElement
+            //{
+            //    Question = "Чем вы можете помочь ордену?",
+            //    AnswersOptions = new String[]
+            //    {
+            //        "Я отлчиный воин", "Я добротный маг", "Я могу работать в кузнице"
+            //    }
+            //});
+            #endregion
 
             for (int i = 0; i < doors.Length; i++)
             {
@@ -63,9 +92,9 @@ namespace hwOOPFirst
 
                 Console.ReadLine();
                 doors[count++].Open();
-            }       
+            }
         }
     }
-    
+
 }
 
