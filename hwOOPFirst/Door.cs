@@ -14,6 +14,9 @@ namespace hwOOPFirst
         }
 
         public DoorStatus Status { get; private set; } = DoorStatus.Closed;
+
+        public Door(DoorStatus status) => Status = status;
+
         public void Open()
         {
             if (Status == DoorStatus.Closed)

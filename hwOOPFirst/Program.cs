@@ -45,12 +45,13 @@ namespace hwOOPFirst
 
             for (int i = 0; i < doors.Length; i++)
             {
-                doors[i] = new Door();
+                doors[i] = new Door(Door.DoorStatus.Closed);
             }
 
             Console.WriteLine("Совершенно очевидно, что мы не берём в наш орден кого попало. По этому заполни вот эту анкету, " +
                               "и мы примем решение, брать тебя или нет");
 
+            int count = 0;
             foreach (var qestionaryElement in questionary)
             {
                 Console.WriteLine(qestionaryElement.Question);
@@ -61,7 +62,7 @@ namespace hwOOPFirst
                 }
 
                 Console.ReadLine();
-                
+                doors[count++].Open();
             }       
         }
     }
