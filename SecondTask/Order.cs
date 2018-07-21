@@ -16,7 +16,7 @@ namespace SecondTask
             return Good.Price * Count;
         }
         
-        public void RemoveGoods()
+        public void GrabeGoods()
         {
             Good.Count -= Count;
         }

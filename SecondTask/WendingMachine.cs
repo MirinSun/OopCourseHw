@@ -32,7 +32,7 @@ namespace SecondTask
             if (Balance < order.GetTotalPrice()) throw new InvalidOperationException("");
 
             Balance -= order.GetTotalPrice();
-            order.RemoveGoods();
+            order.GrabeGoods();
         }
 
         public Good[] GetProductList()

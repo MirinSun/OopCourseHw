@@ -17,29 +17,29 @@ namespace hwOOPFirst
             Questionary questionary = new Questionary()
             {
                 new QuestionaryElement
-                {
-                    Question = "Кто вы?",
-                    AnswersOptions = new String[]
+                (
+                    question: "Кто вы?",
+                    answersOptions: new List<string>()
                     {
                         "Человек", "Брандлмуха", "Кхаджит"
-                    }             
-                },
+                    }
+                ),
                 new QuestionaryElement
-                {
-                    Question = "Что вы хотите?",
-                    AnswersOptions = new String[]
+                (
+                    question: "Что вы хотите?",
+                    answersOptions: new List<string>()
                     {
                         "Победить Аразота", "Стать богатым", "Найти боевых товарищей"
                     }
-                },
+                ),
                 new QuestionaryElement
-                {
-                    Question = "Чем вы можете помочь ордену?",
-                    AnswersOptions = new String[]
+                (
+                    question: "Чем вы можете помочь ордену?",
+                    answersOptions: new List<string>()
                     {
                         "Я отлчиный воин", "Я добротный маг", "Я могу работать в кузнице"
                     }
-                }
+                )
             };
 
             Console.WriteLine("Совершенно очевидно, что мы не берём в наш орден кого попало. По этому заполни вот эту анкету, " +
@@ -53,7 +53,7 @@ namespace hwOOPFirst
                 {
                     Console.WriteLine("[{0}]>{1}", i, qestionaryElement.AnswersOptions[i]);
                 }
-                
+
                 qestionaryElement.PutAnswer(Console.ReadLine());
             }
         }

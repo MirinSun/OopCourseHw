@@ -9,11 +9,20 @@ namespace hwOOPFirst
 {
     class QuestionaryElement
     {
-        //Возможно лучше агрегация
-        public Door Door { get; } = new Door(DoorStatus.Closed);
-        public string Question { get; set; }
-        public string[] AnswersOptions { get; set; }        
+        List<string> _answersOptions;
+        public Door Door { get; }
+        public string Question { get; }
+        public string[] AnswersOptions
+        {
+            get => _answersOptions.ToArray();
+        }
 
+        public QuestionaryElement(string question, List<string> answersOptions, Door door = null)
+        {
+            Question = question ?? String.Empty;
+            _answersOptions = answersOptions ?? new List<string>();
+            Door = door ?? new Door();
+        }
         public void PutAnswer(string answer)
         {
             Door.Open();
