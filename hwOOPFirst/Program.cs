@@ -53,7 +53,7 @@ namespace hwOOPFirst
                 {
                     Console.WriteLine("[{0}]>{1}", i, qestionaryElement.AnswersOptions[i]);
                 }
-
+                
                 qestionaryElement.PutAnswer(Console.ReadLine());
             }
         }
