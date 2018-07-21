@@ -11,9 +11,9 @@ namespace FourTask
         static void Main(string[] args)
         {
             ToDoList toDoList = new ToDoList();
-            toDoList.AddGoulGroup("Личный");
-            toDoList.AddGoulGroup("Рабочий");
-            toDoList.AddGoulGroup("Семейный");
+            toDoList.AddGoalGroup("Личный");
+            toDoList.AddGoalGroup("Рабочий");
+            toDoList.AddGoalGroup("Семейный");
 
             ToDoListGUI toDoListGUI = new ToDoListGUI(toDoList);
 
@@ -33,40 +33,40 @@ namespace FourTask
         {
             Console.Clear();
 
-            ShowGoulsForGroups();
+            ShowGoalsForGroups();
 
             Console.WriteLine("\nКуда вы хотите добавить цель?");
-            string goulGroupName = Console.ReadLine().ToLower();
+            string goalGroupName = Console.ReadLine().ToLower();
             Console.WriteLine("Что это за цель?");
-            string goul = Console.ReadLine();
+            string goal = Console.ReadLine();
 
             try
             {
                 _toDoList
-                    .GetGoulGroup(goulGroupName)
-                    .AddGoul(goul);
+                    .GetGoalGroup(goalGroupName)
+                    .AddGoal(goal);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
-        private void ShowGoulsForGroups()
+        private void ShowGoalsForGroups()
         {
             int i = 0;
-            foreach (var item in _toDoList.GoulGroups)
+            foreach (var item in _toDoList.GoalGroups)
             {
-                Console.Write(i++ == _toDoList.GoulGroups.Length - 1 ? $"{item.Name}\n" : $"{item.Name} |");               
+                Console.Write(i++ == _toDoList.GoalGroups.Length - 1 ? $"{item.Name}\n" : $"{item.Name} |");               
             }
 
-            int max = _toDoList.GetMaxLengthGoulGroup().Gouls.Length;
+            int max = _toDoList.GetMaxLengthGoalGroup().Goals.Length;
             for (i = 0; i < max; i++)
             {
-                for (int j = 0; j < _toDoList.GoulGroups.Length; j++)
+                for (int j = 0; j < _toDoList.GoalGroups.Length; j++)
                 {
-                    if (_toDoList.GoulGroups[j].Gouls.Length > i)
+                    if (_toDoList.GoalGroups[j].Goals.Length > i)
                     {
-                        Console.Write(_toDoList.GoulGroups[j].Gouls[i] + " | ");
+                        Console.Write(_toDoList.GoalGroups[j].Goals[i] + " | ");
                     }
                     else
                     {
@@ -79,26 +79,26 @@ namespace FourTask
     }
     class ToDoList
     {
-        private List<GoulGroup> _goulGroups = new List<GoulGroup>();
+        private List<GoalGroup> _goalGroups = new List<GoalGroup>();
 
-        public GoulGroup[] GoulGroups { get => _goulGroups.ToArray(); }
+        public GoalGroup[] GoalGroups { get => _goalGroups.ToArray(); }
 
-        public void AddGoulGroup(string name)
+        public void AddGoalGroup(string name)
         {
             if (name == null)
                 throw new ArgumentNullException();
-            if (_goulGroups.Find(n => n.Name.ToLower() == name) != null)
+            if (_goalGroups.Find(n => n.Name.ToLower() == name) != null)
                 throw new Exception("Группа с таким именем уже существует");
 
-            _goulGroups.Add(new GoulGroup(name));
+            _goalGroups.Add(new GoalGroup(name));
         }
 
-        public GoulGroup GetGoulGroup(string name)
+        public GoalGroup GetGoalGroup(string name)
         {
             if (name == null)
                 throw new ArgumentNullException();
 
-            GoulGroup findGroup = _goulGroups.Find(n=>n.Name.ToLower() == name);
+            GoalGroup findGroup = _goalGroups.Find(n=>n.Name.ToLower() == name);
 
             if (findGroup == null)
                 throw new Exception("Группа с таким именем не найдена");
@@ -106,35 +106,35 @@ namespace FourTask
             return findGroup;
         }
 
-        public GoulGroup GetMaxLengthGoulGroup()
+        public GoalGroup GetMaxLengthGoalGroup()
         {
-            if (_goulGroups.Count == 0)
+            if (_goalGroups.Count == 0)
                 throw new Exception("Список групп пуст");
 
-            double max = _goulGroups.Max(s => s.Gouls.Length);
+            double max = _goalGroups.Max(s => s.Goals.Length);
 
-            return _goulGroups.Find(n => n.Gouls.Length == max);
+            return _goalGroups.Find(n => n.Goals.Length == max);
         }
 
     }
-    class GoulGroup
+    class GoalGroup
     {
         public string Name { get; }
-        public string[] Gouls { get; private set; } = new string[0];
+        public string[] Goals { get; private set; } = new string[0];
 
-        public GoulGroup(string name) => Name = name;
+        public GoalGroup(string name) => Name = name;
 
-        public void AddGoul(string goul)
+        public void AddGoal(string goal)
         {
-            string[] goulsNew = new string[Gouls.Length + 1];
+            string[] goalsNew = new string[Goals.Length + 1];
 
-            for (int j = 0; j < Gouls.Length; j++)
+            for (int j = 0; j < Goals.Length; j++)
             {
-                goulsNew[j] = Gouls[j];
+                goalsNew[j] = Goals[j];
             }
 
-            goulsNew[goulsNew.Length - 1] = goul ?? throw new ArgumentException();
-            Gouls = goulsNew;
+            goalsNew[goalsNew.Length - 1] = goal ?? throw new ArgumentException();
+            Goals = goalsNew;
         }
     }
 }

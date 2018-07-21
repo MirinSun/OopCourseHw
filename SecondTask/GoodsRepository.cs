@@ -8,7 +8,6 @@ namespace SecondTask
 {
     class GoodsRepository
     {
-
         public Good[] Goods;
 
         public bool Contains(Good good)
