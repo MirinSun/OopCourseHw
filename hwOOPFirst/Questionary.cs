@@ -9,18 +9,14 @@ namespace hwOOPFirst
 {
     class QuestionaryElement
     {
-        List<string> _answersOptions;
         public Door Door { get; }
         public string Question { get; }
-        public string[] AnswersOptions
-        {
-            get => _answersOptions.ToArray();
-        }
+        public IEnumerable<string> AnswersOptions { get; }
 
         public QuestionaryElement(string question, List<string> answersOptions, Door door = null)
         {
             Question = question ?? String.Empty;
-            _answersOptions = answersOptions ?? new List<string>();
+            AnswersOptions = answersOptions ?? new List<string>();
             Door = door ?? new Door();
         }
         public void PutAnswer(string answer)

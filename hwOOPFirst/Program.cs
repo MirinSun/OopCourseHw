@@ -49,11 +49,12 @@ namespace hwOOPFirst
             {
                 Console.WriteLine(qestionaryElement.Question);
 
-                for (int i = 0; i < qestionaryElement.AnswersOptions.Length; i++)
+                int i = 0;
+                foreach (var answers in qestionaryElement.AnswersOptions)
                 {
-                    Console.WriteLine("[{0}]>{1}", i, qestionaryElement.AnswersOptions[i]);
+                    Console.WriteLine("[{0}]>{1}", i++, answers);
                 }
-
+       
                 qestionaryElement.PutAnswer(Console.ReadLine());
             }
         }
