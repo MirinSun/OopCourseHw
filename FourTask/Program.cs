@@ -49,6 +49,7 @@ namespace FourTask
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.ReadKey();
             }
         }
         private void ShowGoalsForGroups()
