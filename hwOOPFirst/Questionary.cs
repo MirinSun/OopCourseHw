@@ -9,8 +9,14 @@ namespace hwOOPFirst
 {
     class QuestionaryElement
     {
+        private Door Door { get; } = new Door(DoorStatus.Closed);
         public string Question { get; set; }
-        public string[] AnswersOptions { get; set; }   
+        public string[] AnswersOptions { get; set; }        
+
+        public void PutAnswer(string answer)
+        {
+            Door.Open();
+        }
     }
 
     class Questionary : IEnumerable<QuestionaryElement>
@@ -23,7 +29,7 @@ namespace hwOOPFirst
                 throw new ArgumentNullException();
 
             _elements.Add(element);
-        }      
+        }
 
         IEnumerator<QuestionaryElement> IEnumerable<QuestionaryElement>.GetEnumerator()
         {
