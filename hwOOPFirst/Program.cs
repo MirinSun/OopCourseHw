@@ -50,9 +50,9 @@ namespace hwOOPFirst
                 Console.WriteLine(qestionaryElement.Question);
 
                 int i = 0;
-                foreach (var answers in qestionaryElement.AnswersOptions)
+                foreach (var answer in qestionaryElement.AnswersOptions)
                 {
-                    Console.WriteLine("[{0}]>{1}", i++, answers);
+                    Console.WriteLine("[{0}]>{1}", i++, answer);
                 }
        
                 qestionaryElement.PutAnswer(Console.ReadLine());
