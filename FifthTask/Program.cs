@@ -10,8 +10,29 @@ namespace FifthTask
     {
         static void Main(string[] args)
         {
-            Console.BufferWidth = 1000;
-            Console.WriteLine("sddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+            DialogueTreeComponent one = new DialogueTreeComponent
+                (
+                    new DialogFragment
+                    (
+                        question: "Кто вы такой?",
+                        answersOptions: new List<string>()
+                        {
+                            "Человек","Эльф","Гном"
+                        }
+                     )
+                );
+
+            DialogueTreeComponent two = new DialogueTreeComponent
+                            (
+                                new DialogFragment
+                                (
+                                    question: "?",
+                                    answersOptions: new List<string>()
+                                    {
+                                        "Человек","Эльф","Гном"
+                                    }
+                                 )
+                            );
         }
     }
 }
