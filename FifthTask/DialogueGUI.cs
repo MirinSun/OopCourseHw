@@ -54,7 +54,7 @@ namespace FifthTask
                             Console.WriteLine($"{item}\n");
                         }
 
-                        component = _dialoge[n].PutAnwser(Console.ReadLine());
+                        component = _dialoge[n].PutAnswer(Console.ReadLine());
                     }
                 }
                 catch(Exception ex)

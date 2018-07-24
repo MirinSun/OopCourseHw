@@ -88,7 +88,7 @@ namespace FifthTask
             Name = name ?? throw new ArgumentNullException();
         }
         
-        public DialogueComponent PutAnwser(string answer)
+        public DialogueComponent PutAnswer(string answer)
         {
             ((DialogueComposit)_current).Answer = answer;
             return _current = ((DialogueComposit)_current).CheckAnswer();
