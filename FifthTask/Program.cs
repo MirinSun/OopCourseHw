@@ -10,29 +10,34 @@ namespace FifthTask
     {
         static void Main(string[] args)
         {
-            DialogueTreeComponent one = new DialogueTreeComponent
-                (
-                    new DialogFragment
-                    (
-                        question: "Кто вы такой?",
-                        answersOptions: new List<string>()
-                        {
-                            "Человек","Эльф","Гном"
-                        }
-                     )
-                );
+            string[] answers = { "Да", "Нет" };
 
-            DialogueTreeComponent two = new DialogueTreeComponent
-                            (
-                                new DialogFragment
-                                (
-                                    question: "?",
-                                    answersOptions: new List<string>()
-                                    {
-                                        "Человек","Эльф","Гном"
-                                    }
-                                 )
-                            );
+            DialogueComponent firstEnding = new DialogueEnding("Вы победили!");
+            DialogueComponent secondEnding = new DialogueEnding("Вы проиграли");
+
+            DialogueComponent firstBranching = new DialogueComposit
+                (
+                    question: "А Ваша мама была орком?",
+                    answers: new Dictionary<string, DialogueComponent>()
+                );
+            firstBranching.Add(new KeyValuePair<string, DialogueComponent>(answers[0], firstEnding));
+            firstBranching.Add(new KeyValuePair<string, DialogueComponent>(answers[1], secondEnding));
+
+            DialogueComponent root = new DialogueComposit
+                (
+                    question: "Вы орк?",
+                    answers: new Dictionary<string, DialogueComponent>()
+                );
+            root.Add(new KeyValuePair<string, DialogueComponent>(answers[0], firstBranching));
+            root.Add(new KeyValuePair<string, DialogueComponent>(answers[1], secondEnding));
+
+            Dialogue dialogue = new Dialogue(root, "Тест");
+            DialogueGUI gUI = new DialogueGUI(new Dialogue[] { dialogue });
+
+            while(true)
+            {
+                gUI.Update();
+            }
         }
     }
 }
