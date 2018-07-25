@@ -12,13 +12,14 @@ namespace FifthTask
 
         public Dictionary<string, DialogueComponent> Answers { get; private set; }
 
+        public bool IsEnding { get => Answers.Count == 0; }
+
         public DialogueComponent(string sentence, Dictionary<string, DialogueComponent> answers = null)
         {
             Sentence = sentence ?? throw new ArgumentNullException();
             Answers = answers ?? new Dictionary<string, DialogueComponent>();
         }
-
-        public bool IsEnding { get => Answers.Count == 0; }
+       
         public void Add(KeyValuePair<string, DialogueComponent> answer)
         {
             Answers.Add(answer.Key, answer.Value);
