@@ -8,10 +8,10 @@ namespace FifthTask
 {
     class DialogueGUI
     {
-        private Dialogue[] _dialoge;
+        private Dialogue[] _dialogues;
 
         public DialogueGUI(Dialogue[] dialogue) => 
-            _dialoge = dialogue ?? throw new ArgumentNullException();
+            _dialogues = dialogue ?? throw new ArgumentNullException();
 
         public void Update()
         {
@@ -23,13 +23,13 @@ namespace FifthTask
             switch (ch)
             {
                 case "ShowAll":
-                    foreach (var item in _dialoge)
+                    foreach (var item in _dialogues)
                     {
                         Console.WriteLine($"{item.Name}\n");
                     }
                     break;
                 case "Start 1":
-                    StartDialog(0);
+                    StartDialogue(0);
                     break;
                 default:
                     Console.WriteLine("Вы ввели неверную команду");
@@ -37,36 +37,30 @@ namespace FifthTask
             }
             Console.ReadKey();
         }
-        private void StartDialog(int n)
+        private void StartDialogue(int n)
         {
-            DialogueComponent component = _dialoge[n].GetStartComponent();
+            DialogueComponent component = _dialogues[n].GetStartComponent();
 
-            do
-            {      
+            while(!component.IsEnding)
+            {
                 try
                 {
                     Console.WriteLine($"{component.Sentence}\n");
-
-                    if (component is DialogueComposit)
+                    foreach (var item in component.Answers.Keys)
                     {
-                        foreach (var item in ((DialogueComposit)component).Answers.Keys)
-                        {
-                            Console.WriteLine($"{item}\n");
-                        }
-
-                        component = _dialoge[n].PutAnswer(Console.ReadLine());
+                        Console.WriteLine($"{item}\n");
                     }
+
+                    component = _dialogues[n].PutAnswer(Console.ReadLine());
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine($"{ex.Message}\n");
-                }
-                
-
-            } while (component is DialogueComposit);
-
+                }              
+            }
+          
             Console.WriteLine($"{component.Sentence}\n");
-            _dialoge[n].Reset();
+            _dialogues[n].Reset();
         }
     }
 }

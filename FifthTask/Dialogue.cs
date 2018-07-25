@@ -6,101 +6,65 @@ using System.Threading.Tasks;
 
 namespace FifthTask
 {
-    abstract class DialogueComponent
+    public class DialogueComponent
     {
-        public string Sentence { get; }
+        public string Sentence { get; private set; }
 
-        public DialogueComponent(string question) =>
-            Sentence = question ?? throw new ArgumentNullException();
-
-        public abstract void Add(KeyValuePair<string, DialogueComponent> answer);
-        public abstract void Remove(KeyValuePair<string, DialogueComponent> anwser);
-
-        public override bool Equals(object obj)
-        {
-            return ((DialogueComponent)obj).Sentence == Sentence;
-        }
-        public override int GetHashCode()
-        {
-            return Sentence.GetHashCode();
-        }
-    }
-    class DialogueComposit : DialogueComponent
-    {
         public Dictionary<string, DialogueComponent> Answers { get; private set; }
-        public string Answer { get; internal set; }
 
-        public DialogueComposit(string question, Dictionary<string, DialogueComponent> answers)
-            : base(question) =>
-            Answers = answers ?? throw new ArgumentNullException();
-       
-        public override void Add(KeyValuePair<string, DialogueComponent> answer)
+        public DialogueComponent(string sentence, Dictionary<string, DialogueComponent> answers = null)
+        {
+            Sentence = sentence ?? throw new ArgumentNullException();
+            Answers = answers ?? new Dictionary<string, DialogueComponent>();
+        }
+
+        public bool IsEnding { get => Answers.Count == 0; }
+        public void Add(KeyValuePair<string, DialogueComponent> answer)
         {
             Answers.Add(answer.Key, answer.Value);
         }
 
-        public override void Remove(KeyValuePair<string, DialogueComponent> answer)
+        public void Remove(string answer)
         {
-            Answers.Remove(answer.Key);
+            Answers.Remove(answer);
         }
 
-        public override bool Equals(object obj)
+        internal DialogueComponent CheckAnswer(string answer)
         {
-            return Answers.Equals(((DialogueComposit)obj).Answers) &&
-                base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Answers.GetHashCode() ^
-                base.GetHashCode();
-        }
-        internal DialogueComponent CheckAnswer()
-        {
-            if (Answers.TryGetValue(Answer, out DialogueComponent next))
-                return next;
+            if (Answers.TryGetValue(answer, out DialogueComponent nextComponent))
+                return nextComponent;
             else
                 throw new Exception("Некоррекнтый ответ");
         }
     }
-    class DialogueEnding : DialogueComponent
-    {
-        public DialogueEnding(string sentence) : base(sentence) { }
-        public override void Add(KeyValuePair<string, DialogueComponent> answer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Remove(KeyValuePair<string, DialogueComponent> anwser)
-        {
-            throw new NotImplementedException();
-        }
-    }
     class Dialogue
-    {
+    {     
         private DialogueComponent _root;
         private DialogueComponent _current;
 
-        public string Name { get; }
-        public Dialogue(DialogueComponent root, string name)
+        public string Name { get; set; }
+        public Dialogue(string name, DialogueComponent root)
         {
-            _root = _current = root ?? throw new ArgumentNullException();
             Name = name ?? throw new ArgumentNullException();
+            _root = _current = root ?? throw new ArgumentNullException();
         }
-        
+
         public DialogueComponent PutAnswer(string answer)
         {
-            ((DialogueComposit)_current).Answer = answer;
-            return _current = ((DialogueComposit)_current).CheckAnswer();
-        } 
+            if (_current.IsEnding)
+                throw new Exception("Конец диалога достигнут");
+
+            return _current = _current.CheckAnswer(answer);
+        }
+
         public void Reset()
         {
             _current = _root;
         }
+
         public DialogueComponent GetStartComponent()
         {
             return _root;
         }
     }
-
 }
