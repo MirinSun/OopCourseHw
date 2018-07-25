@@ -39,18 +39,20 @@ namespace FifthTask
         }
         private void StartDialogue(int n)
         {
+            Console.Clear();
             DialogueComponent component = _dialogues[n].GetStartComponent();
 
             while(!component.IsEnding)
             {
                 try
                 {
-                    Console.WriteLine($"{component.Sentence}\n");
+                    Console.WriteLine($"\n{component.Sentence}\n");
                     foreach (var item in component.Answers.Keys)
                     {
                         Console.WriteLine($"{item}\n");
                     }
 
+                    Console.Write("Введите ответ: ");
                     component = _dialogues[n].PutAnswer(Console.ReadLine());
                 }
                 catch(Exception ex)
@@ -59,7 +61,7 @@ namespace FifthTask
                 }              
             }
           
-            Console.WriteLine($"{component.Sentence}\n");
+            Console.WriteLine($"\n{component.Sentence}\n");
             _dialogues[n].Reset();
         }
     }
