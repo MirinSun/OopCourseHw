@@ -13,7 +13,7 @@ namespace EighthTask
         static void Main(string[] args)
         {
             WebParser webParser = new WebParser("https://ling47.ru");
-            string text = webParser.FindContentInTag("head");
+            string text = webParser.FindContentInTag("li");
             Console.WriteLine(text);
         }
     }
